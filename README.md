@@ -144,3 +144,37 @@ Made by Callum using:
 * [mxbai-embed-large](https://ollama.com/library/mxbai-embed-large)
 * Indian food inspiration 🍛
 
+Alaine Demate and project customization overview
+- List of 15 new food items added with brief descriptions
+   -Lechon is a Filipino roasted whole pig with crispy golden skin, served at celebrations and special occasions
+
+   - Sinigang is a Filipino sour soup made with pork or seafood, tamarind, and vegetables.
+
+   - Patatim is a Filipino braised pork dish cooked in soy sauce, vinegar, and spices.
+
+   - Pancit Bihon is a Filipino stir-fried rice noodle dish with vegetables and meat or seafood.
+
+   - Sisig is a Filipino dish made with chopped meat, liver, and onions cooked on a hot griddle with vinegar and spices.
+
+   - Salmon is a pink-fleshed fish rich in omega-3 fatty acids, highly nutritious and versatile.
+
+   - Blueberries are small, round berries with a deep blue color and a sweet-tart flavor, packed with antioxidants.
+
+   - Spinach is a dark green leafy vegetable rich in iron, vitamins, and minerals, commonly used in salads and cooked dishes.
+
+   - Avocados are creamy fruits with a large pit, rich in healthy fats and often used in salads, guacamole, and toast.
+
+   - Mangoes are tropical stone fruits with sweet, juicy flesh, known as the king of fruits.
+
+   - Pasta Carbonara is an Italian main course made with pasta, guanciale, eggs, and Pecorino cheese.
+
+   - Sweet and Sour Pork is a Chinese stir-fry dish made with pork, bell peppers, and pineapple in a tangy sweet and sour sauce.
+
+   - Burritos are Mexican wraps made with a large flour tortilla filled with rice, beans, meat, and toppings.
+
+   - Tiramisu is an Italian dessert made with layers of sponge fingers dipped in coffee and mascarpone cream, dusted with cocoa.
+
+   - Green Curry is a Thai curry made with green chili peppers, coconut milk, bamboo shoots, and basil.
+
+- Personal Reflection
+   - In all honesty, this is all out of my comfort zone. Even as I am learning how the ropes are tied, I am still a bit unclear with how well I am doing. But things are working on my end - so that should count, right? I am learning new things every time, and it has been both an honor and a joy to see things work. RAG is something I never thought I'd touch, yet here I am, and I do have to say, I am seeing the appeal and efficiency of AI in the use of programming and coding for data. Having AI be used in the form of analyzing data and answering inquiries is very effective - and even more so when I am seeing it build something to life. Learning about AI really does change things and perspectives. Personally, as someone studying business management, these AI tools are so efficient and effective in the aspect of research and development, from data analysis to summarizing facts to make an inference. I want to learn more and see it come to fruition, so I will keep trying to succeed and will fail through the processes to get there.

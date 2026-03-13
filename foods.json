@@ -448,5 +448,95 @@
   "text": "Suutei tsai is a traditional Mongolian milk tea made with green tea, milk, water, and salt.",
   "region": "Mongolia",
   "type": "Beverage"
+},
+{
+  "id": "76",
+  "text": "Lechon is a Filipino roasted whole pig with crispy golden skin, served at celebrations and special occasions.",
+  "region": "Philippines",
+  "type": "Main Course"
+},
+{
+  "id": "77",
+  "text": "Sinigang is a Filipino sour soup made with pork or seafood, tamarind, and vegetables.",
+  "region": "Philippines",
+  "type": "Soup"
+},
+{
+  "id": "78",
+  "text": "Patatim is a Filipino braised pork dish cooked in soy sauce, vinegar, and spices.",
+  "region": "Philippines",
+  "type": "Main Course"
+},
+{
+  "id": "79",
+  "text": "Pancit Bihon is a Filipino stir-fried rice noodle dish with vegetables and meat or seafood.",
+  "region": "Philippines",
+  "type": "Noodle"
+},
+{
+  "id": "80",
+  "text": "Salmon is a pink-fleshed fish rich in omega-3 fatty acids, highly nutritious and versatile.",
+  "region": "Various",
+  "type": "Fish"
+},
+{
+  "id": "81",
+  "text": "Blueberries are small, round berries with a deep blue color and a sweet-tart flavor, packed with antioxidants.",
+  "region": "Temperate",
+  "type": "Fruit"
+},
+{
+  "id": "82",
+  "text": "Spinach is a dark green leafy vegetable rich in iron, vitamins, and minerals, commonly used in salads and cooked dishes.",
+  "region": "Various",
+  "type": "Vegetable"
+},
+{
+  "id": "83",
+  "text": "Avocados are creamy fruits with a large pit, rich in healthy fats and often used in salads, guacamole, and toast.",
+  "region": "Tropical",
+  "type": "Fruit"
+},
+{
+  "id": "84",
+  "text": "Mangoes are tropical stone fruits with sweet, juicy flesh, known as the king of fruits.",
+  "region": "Tropical",
+  "type": "Fruit"
+},
+{
+  "id": "85",
+  "text": "Pasta Carbonara is an Italian main course made with pasta, guanciale, eggs, and Pecorino cheese.",
+  "region": "Italy",
+  "type": "Main Course"
+},
+{
+  "id": "86",
+  "text": "Sweet and Sour Pork is a Chinese stir-fry dish made with pork, bell peppers, and pineapple in a tangy sweet and sour sauce.",
+  "region": "China",
+  "type": "Main Course"
+},
+{
+  "id": "87",
+  "text": "Burritos are Mexican wraps made with a large flour tortilla filled with rice, beans, meat, and toppings.",
+  "region": "Mexico",
+  "type": "Main Course"
+},
+{
+  "id": "88",
+  "text": "Tiramisu is an Italian dessert made with layers of sponge fingers dipped in coffee and mascarpone cream, dusted with cocoa.",
+  "region": "Italy",
+  "type": "Dessert"
+},
+{
+  "id": "89",
+  "text": "Green Curry is a Thai curry made with green chili peppers, coconut milk, bamboo shoots, and basil.",
+  "region": "Thailand",
+  "type": "Main Course"
+},
+{
+  "id": "90",
+  "text": "Sisig is a Filipino dish made with chopped meat, liver, and onions cooked on a hot griddle with vinegar and spices.",
+  "region": "Philippines",
+  "type": "Main Course"
 }
 ]
