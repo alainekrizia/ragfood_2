@@ -1,0 +1,173 @@
+================================================================================
+                    RAG-FOOD: INSTALLATION & SETUP GUIDE
+================================================================================
+
+This guide will walk you through setting up the RAG-Food project from scratch.
+
+================================================================================
+PREREQUISITES
+================================================================================
+
+- Python 3.8 or higher
+- Git
+- Pip (comes with Python)
+- Internet connection (for API access)
+
+================================================================================
+STEP 1: CLONE THE REPOSITORY
+================================================================================
+
+Open your terminal/command prompt and run:
+
+  git clone <your-repo-url>
+  cd ragfood
+
+================================================================================
+STEP 2: CREATE A VIRTUAL ENVIRONMENT
+================================================================================
+
+Windows (PowerShell):
+  python -m venv .venv
+  .venv\Scripts\activate
+
+Windows (Command Prompt):
+  python -m venv .venv
+  .venv\Scripts\activate.bat
+
+macOS/Linux:
+  python -m venv .venv
+  source .venv/bin/activate
+
+You should see (.venv) at the beginning of your terminal prompt when activated.
+
+================================================================================
+STEP 3: INSTALL DEPENDENCIES
+================================================================================
+
+With your virtual environment activated, run:
+
+  pip install requests
+
+This installs the required library for making HTTP requests to APIs.
+
+================================================================================
+STEP 4: SET UP API KEYS
+================================================================================
+
+This project requires two API keys:
+
+A. GROQ API KEY (for LLM)
+   1. Sign up at https://console.groq.com
+   2. Navigate to your dashboard and create an API key
+   3. Copy your API key
+
+B. HUGGING FACE API KEY (for embeddings)
+   1. Sign up at https://huggingface.co
+   2. Go to your account settings → Access Tokens
+   3. Create a new token (read or write access)
+   4. Copy your token
+
+================================================================================
+STEP 5: SET ENVIRONMENT VARIABLES
+================================================================================
+
+Replace 'your-groq-api-key' and 'your-hugging-face-api-key' with your actual keys.
+
+Windows (PowerShell):
+  $env:GROQ_API_KEY = "your-groq-api-key"
+  $env:HF_API_KEY = "your-hugging-face-api-key"
+
+Windows (Command Prompt):
+  set GROQ_API_KEY=your-groq-api-key
+  set HF_API_KEY=your-hugging-face-api-key
+
+macOS/Linux:
+  export GROQ_API_KEY="your-groq-api-key"
+  export HF_API_KEY="your-hugging-face-api-key"
+
+NOTE: These environment variables will only persist for the current terminal
+session. To make them permanent, add them to your system environment variables
+or shell profile (.bashrc, .zshrc, etc.).
+
+================================================================================
+STEP 6: VERIFY YOUR SETUP
+================================================================================
+
+To verify everything is configured correctly, run:
+
+  python rag_run.py
+
+You should see the application start and process your queries without errors.
+
+================================================================================
+WHAT THIS PROJECT DOES
+================================================================================
+
+RAG-Food is a Retrieval-Augmented Generation (RAG) application that:
+
+- Uses Hugging Face embeddings to vectorize your food dataset
+- Stores embeddings in Upstash Vector (cloud-based vector database)
+- Accepts natural language questions about food
+- Retrieves relevant information from the vector database
+- Uses Groq's LLM (llama-3.1-8b-instant) to generate answers
+
+Example questions you can ask:
+  - "Which Indian dish uses chickpeas?"
+  - "What dessert is made from milk and soaked in syrup?"
+  - "What is masala dosa made of?"
+
+================================================================================
+PROJECT STRUCTURE
+================================================================================
+
+ragfood/
+├── foods.json              - Your food dataset
+├── rag_run.py              - Main application file
+├── chroma_db/              - Local ChromaDB folder (for future use)
+├── api/                    - API-related code
+├── lib/                    - Library files
+├── README.md               - Project documentation
+└── INSTALLATION.txt        - This file
+
+================================================================================
+TROUBLESHOOTING
+================================================================================
+
+1. "GROQ_API_KEY not set" error
+   → Make sure you've set the environment variable correctly
+   → Verify your key has no extra spaces
+   → Restart your terminal after setting the variable
+
+2. "HF_API_KEY not set" error
+   → Same as above for Hugging Face API key
+
+3. Import errors (ModuleNotFoundError)
+   → Make sure your virtual environment is activated
+   → Run: pip install requests
+
+4. Connection errors
+   → Check your internet connection
+   → Verify API keys are valid
+   → Check if Upstash Vector service is accessible
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+1. Read the README.md for more details about how the RAG system works
+2. Customize the food dataset by editing foods.json
+3. Experiment with different questions
+4. Consider adding more error handling or features
+
+================================================================================
+SUPPORT & DOCUMENTATION
+================================================================================
+
+- Groq: https://console.groq.com/docs
+- Hugging Face: https://huggingface.co/docs
+- Upstash: https://upstash.com/docs
+- RAG Resources: See README.md for more information
+
+================================================================================
+                              END OF SETUP GUIDE
+================================================================================
