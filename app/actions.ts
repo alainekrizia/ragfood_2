@@ -4,13 +4,6 @@ import { Index } from '@upstash/vector'
 import { Groq } from 'groq-sdk'
 import foodsData from '@/foods.json'
 
-interface FoodItem {
-  id: string
-  text: string
-  region: string
-  type: string
-}
-
 interface QueryResult {
   success: boolean
   response?: string
