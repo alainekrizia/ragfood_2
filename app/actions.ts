@@ -75,7 +75,7 @@ export async function queryFood(userQuery: string): Promise<QueryResult> {
       .join('\n')
 
     // Generate response using Groq
-    const message = await groq.messages.create({
+    const message = await groq.chat.completions.create({
       model: 'mixtral-8x7b-32768',
       max_tokens: 1024,
       messages: [
@@ -87,7 +87,7 @@ export async function queryFood(userQuery: string): Promise<QueryResult> {
     })
 
     const responseText =
-      message.content[0].type === 'text' ? message.content[0].text : 'Unable to generate response'
+      message.choices[0].message.content || 'Unable to generate response'
 
     return {
       success: true,
