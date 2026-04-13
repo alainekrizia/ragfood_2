@@ -2,7 +2,7 @@
 
 import { Index } from '@upstash/vector'
 import { Groq } from 'groq-sdk'
-import * as fs from 'fs'
+import foodsData from '@/foods.json'
 
 interface FoodItem {
   id: string
@@ -30,17 +30,6 @@ const index = new Index({
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 })
-
-// Load foods.json at initialization
-let foodsData: FoodItem[] = []
-try {
-  const foodsPath = new URL('../foods.json', import.meta.url)
-  const foodsJson = fs.readFileSync(foodsPath, 'utf-8')
-  foodsData = JSON.parse(foodsJson)
-  console.log(`[RAG] Loaded ${foodsData.length} food items`)
-} catch (error) {
-  console.error('[RAG] Failed to load foods.json:', error)
-}
 
 // Simple embedding function using text hash for deterministic vectors
 function generateEmbedding(text: string): number[] {
