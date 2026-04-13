@@ -31,22 +31,55 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 })
 
-// Simple embedding function using text hash for deterministic vectors
+// Create a semantic embedding by analyzing word importance
 function generateEmbedding(text: string): number[] {
   const vector: number[] = new Array(1024).fill(0)
   
-  let hash = 0
-  for (let i = 0; i < text.length; i++) {
-    const char = text.charCodeAt(i)
-    hash = ((hash << 5) - hash) + char
-    hash = hash & hash // Convert to 32bit integer
+  // Important keywords for food classification
+  const foodKeywords = [
+    'sushi', 'ramen', 'tempura', 'miso', 'okonomiyaki', 'japanese',
+    'adobo', 'lechon', 'sinigang', 'patatim', 'pancit', 'filipin',
+    'curry', 'biryani', 'samosa', 'paneer', 'dosa', 'tandoori',
+    'pad thai', 'tom yum', 'green curry', 'thai',
+    'pho', 'vietnamese',
+    'peking', 'kung pao', 'mapo tofu', 'dim sum', 'chow mein', 'chinese',
+    'nasi goreng', 'rendang', 'indonesian',
+    'spring roll', 'dumpling', 'noodle', 'soup', 'stir-fry',
+    'fish', 'meat', 'chicken', 'pork', 'beef', 'seafood',
+    'rice', 'noodles', 'bread', 'pastry', 'dessert',
+    'spicy', 'sweet', 'sour', 'savory', 'creamy',
+  ]
+  
+  const lowerText = text.toLowerCase()
+  let keywordMatchCount = 0
+  
+  // Score each keyword
+  for (let i = 0; i < foodKeywords.length; i++) {
+    if (lowerText.includes(foodKeywords[i])) {
+      vector[i % 1024] += 1.0
+      keywordMatchCount++
+    }
   }
   
-  // Use hash to seed deterministic random values
-  let seed = Math.abs(hash)
-  for (let i = 0; i < vector.length; i++) {
-    seed = (seed * 9301 + 49297) % 233280
-    vector[i] = (seed / 233280) * 2 - 1
+  // Add position-based scores (important words often appear early)
+  const words = lowerText.split(/\s+/)
+  for (let i = 0; i < Math.min(words.length, 20); i++) {
+    const word = words[i]
+    if (word.length > 3) {
+      const charSum = word.split('').reduce((sum, c) => sum + c.charCodeAt(0), 0)
+      const idx = charSum % 1024
+      vector[idx] += (1 - i / 20) * 0.5 // Earlier words get higher weight
+    }
+  }
+  
+  // Add region-based signals
+  const regions = ['japan', 'filipin', 'thai', 'vietn', 'chinese', 'indian', 'korean', 'italian', 'mexican']
+  for (let i = 0; i < regions.length; i++) {
+    if (lowerText.includes(regions[i])) {
+      for (let j = 0; j < 50; j++) {
+        vector[(i * 50 + j) % 1024] += 0.8
+      }
+    }
   }
   
   // Normalize the vector
@@ -54,6 +87,11 @@ function generateEmbedding(text: string): number[] {
   if (norm > 0) {
     for (let i = 0; i < vector.length; i++) {
       vector[i] /= norm
+    }
+  } else {
+    // If all zeros, create a uniform distribution
+    for (let i = 0; i < vector.length; i++) {
+      vector[i] = 1 / Math.sqrt(1024)
     }
   }
   
