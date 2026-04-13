@@ -76,7 +76,7 @@ export async function queryFood(userQuery: string): Promise<QueryResult> {
 
     // Generate response using Groq
     const message = await groq.chat.completions.create({
-      model: 'mixtral-8x7b-32768',
+      model: 'llama-3.1-70b-versatile',
       max_tokens: 1024,
       messages: [
         {
