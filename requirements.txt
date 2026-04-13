@@ -1,0 +1,12 @@
+# RAG Food Assistant Dependencies
+
+# Core HTTP and environment management
+requests==2.31.0         # HTTP requests for API calls (Upstash, Groq)
+python-dotenv==1.0.1     # Load environment variables from .env.local
+
+# Optional dependencies (for development/old version support)
+# Uncomment these only if you want to use the old ChromaDB version (rag_run.py)
+# chromadb==0.4.21  # Local vector database (not used in new version)
+
+# Python version requirement
+# Requires: Python 3.8 or higher

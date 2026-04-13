@@ -5,176 +5,162 @@ Here’s a clear, beginner-friendly `README.md` for your RAG project, designed t
 ## 📄 `README.md`
 
 ````markdown
-# 🧠 RAG-Food: Simple Retrieval-Augmented Generation with ChromaDB + Ollama
+# Food RAG - AI-Powered Food Knowledge Assistant
 
-This is a **minimal working RAG (Retrieval-Augmented Generation)** demo using:
+A full-stack Retrieval-Augmented Generation (RAG) application for food knowledge using Next.js, Upstash Vector, and Groq AI.
 
-- ✅ Local LLM via [Ollama](https://ollama.com/)
-- ✅ Local embeddings via `mxbai-embed-large`
-- ✅ [ChromaDB](https://www.trychroma.com/) as the vector database
-- ✅ A simple food dataset in JSON (Indian foods, fruits, etc.)
+**Live chat interface** → Ask questions about foods, cuisines, and recipes from around the world, with citations to food sources.
 
----
+## Features
 
-## 🎯 What This Does
+- **Interactive Chat UI**: Modern, responsive chat interface built with React
+- **Retrieval-Augmented Generation**: Queries vector database before generating responses
+- **Real-time AI Responses**: Powered by Groq's fast LLM inference
+- **Source Attribution**: Each response includes citations to relevant food items
+- **Error Handling**: Graceful fallbacks and user-friendly error messages
+- **Food-themed Design**: Warm colors (oranges, greens, gold) inspired by food and cooking
 
-This app allows you to ask questions like:
+## Tech Stack
 
-- “Which Indian dish uses chickpeas?”
-- “What dessert is made from milk and soaked in syrup?”
-- “What is masala dosa made of?”
+### Frontend
+- **Next.js 16** - React framework with App Router
+- **React 19** - UI library
+- **Tailwind CSS** - Styling
+- **Lucide React** - Icons
 
-It **does not rely on the LLM’s built-in memory**. Instead, it:
+### Backend
+- **Upstash Vector** - Serverless vector database for embeddings
+- **Groq API** - Fast LLM inference for generating responses
+- **Server Actions** - Next.js server-side functions for secure API calls
 
-1. **Embeds your custom text data** (about food) using `mxbai-embed-large`
-2. Stores those embeddings in **ChromaDB**
-3. For any question, it:
-   - Embeds your question
-   - Finds relevant context via similarity search
-   - Passes that context + question to a local LLM (`llama3.2`)
-4. Returns a natural-language answer grounded in your data.
+### Data
+- **foods.json** - Knowledge base with 90+ food items from 15+ regions
 
----
+## Quick Start
 
-## 📦 Requirements
+### Prerequisites
+- Node.js 18+
+- API keys for:
+  - Upstash Vector (REST URL + Token)
+  - Groq API
 
-### ✅ Software
+### Setup
 
-- Python 3.8+
-- Ollama installed and running locally
-- ChromaDB installed
+1. **Clone and install**
+   ```bash
+   git clone https://github.com/alainekrizia/ragfood_2.git
+   cd ragfood_2
+   npm install
+   ```
 
-### ✅ Ollama Models Needed
+2. **Configure environment variables**
+   ```bash
+   cp .env.local.example .env.local
+   ```
+   Fill in your credentials:
+   ```
+   UPSTASH_VECTOR_REST_URL=https://...
+   UPSTASH_VECTOR_REST_TOKEN=...
+   GROQ_API_KEY=...
+   ```
 
-Run these in your terminal to install them:
+3. **Run development server**
+   ```bash
+   npm run dev
+   ```
+   Open http://localhost:3000
+
+## Project Structure
+
+```
+├── app/
+│   ├── layout.tsx           # Root layout with metadata
+│   ├── page.tsx             # Main page
+│   ├── globals.css          # Global styles & design tokens
+│   └── actions.ts           # Server actions for RAG queries
+├── components/
+│   └── ChatInterface.tsx     # Chat UI component
+├── foods.json               # Food knowledge base
+├── package.json
+├── tailwind.config.ts
+└── README.md
+```
+
+## How It Works
+
+1. **User submits query** via chat interface
+2. **Server Action** (`queryFood`) receives the question
+3. **Vector search** against Upstash Vector returns top 5 relevant foods
+4. **Context building** from retrieved documents
+5. **LLM generation** using Groq API with the context
+6. **Response + sources** returned to user
+
+## Deployment
+
+### Deploy to Vercel
 
 ```bash
-ollama pull llama3.2
-ollama pull mxbai-embed-large
-````
+# Connect your repo and push to GitHub
+# In Vercel dashboard, add environment variables:
+# - UPSTASH_VECTOR_REST_URL
+# - UPSTASH_VECTOR_REST_TOKEN
+# - GROQ_API_KEY
+```
 
-> Make sure `ollama` is running in the background. You can test it with:
->
-> ```bash
-> ollama run llama3.2
-> ```
+## Python Scripts (Local Development)
 
----
+The repository includes Python RAG implementations for testing:
 
-## 🛠️ Installation & Setup
+- **`rag_run.py`** - ChromaDB-based RAG (local embeddings with Ollama)
+- **`rag_run_upstash.py`** - Upstash Vector with retry logic and Groq integration
+- **`debug_groq.py`** - Test Groq API connectivity
+- **`test_app.py`** - Test the Upstash RAG workflow
 
-### 1. Clone or download this repo
-
+Run Python scripts:
 ```bash
-git clone https://github.com/yourname/rag-food
-cd rag-food
+# Install Python dependencies
+pip install chromadb requests upstash-vector groq
+
+# Run tests
+python test_app.py
 ```
 
-### 2. Install Python dependencies
+## Color Palette
 
-```bash
-pip install chromadb requests
-```
+- **Primary Orange**: `#d4602e` - Main interactive elements
+- **Forest Green**: `#2d5016` - Secondary actions and accents
+- **Gold**: `#c9a961` - Highlights and sources
+- **Cream**: `#faf8f3` - Background
+- **Dark Gray**: `#1a1a1a` - Text
 
-### 3. Run the RAG app
+## Error Handling
 
-```bash
-python rag_run.py
-```
+The app handles:
+- Empty query validation
+- Missing API credentials detection
+- Rate limiting from Groq (free tier)
+- Vector store connectivity issues
+- Graceful fallbacks with helpful messages
 
-If it's the first time, it will:
+## Troubleshooting
 
-* Create `foods.json` if missing
-* Generate embeddings for all food items
-* Load them into ChromaDB
-* Run a few example questions
+| Issue | Solution |
+|-------|----------|
+| "Vector store not configured" | Check `.env.local` has correct Upstash credentials |
+| "AI service not configured" | Verify `GROQ_API_KEY` is set and valid |
+| "Rate limit reached" | Wait a moment - Groq free tier has limits |
+| "No relevant food information" | Try different keywords or broader terms |
 
----
+## Learning Resources
 
-## 📁 File Structure
+- [Next.js Documentation](https://nextjs.org/docs)
+- [Upstash Vector](https://upstash.com/docs/vector/overall/getstarted)
+- [Groq API](https://console.groq.com/docs)
+- [RAG Pattern](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)
 
-```
-rag-food/
-├── rag_run.py       # Main app script
-├── foods.json       # Food knowledge base (created if missing)
-├── README.md        # This file
-```
+## Credits
 
----
-
-## 🧠 How It Works (Step-by-Step)
-
-1. **Data** is loaded from `foods.json`
-2. Each entry is embedded using Ollama's `mxbai-embed-large`
-3. Embeddings are stored in ChromaDB
-4. When you ask a question:
-
-   * The question is embedded
-   * The top 1–2 most relevant chunks are retrieved
-   * The context + question is passed to `llama3.2`
-   * The model answers using that info only
-
----
-
-## 🔍 Try Custom Questions
-
-You can update `rag_run.py` to include your own questions like:
-
-```python
-print(rag_query("What is tandoori chicken?"))
-print(rag_query("Which foods are spicy and vegetarian?"))
-```
-
----
-
-## 🚀 Next Ideas
-
-* Swap in larger datasets (Wikipedia articles, recipes, PDFs)
-* Add a web UI with Gradio or Flask
-* Cache embeddings to avoid reprocessing on every run
-
----
-
-## 👨‍🍳 Credits
-
-Made by Callum using:
-
-* [Ollama](https://ollama.com)
-* [ChromaDB](https://www.trychroma.com)
-* [mxbai-embed-large](https://ollama.com/library/mxbai-embed-large)
-* Indian food inspiration 🍛
-
-Alaine Demate and project customization overview
-- List of 15 new food items added with brief descriptions
-   -Lechon is a Filipino roasted whole pig with crispy golden skin, served at celebrations and special occasions
-
-   - Sinigang is a Filipino sour soup made with pork or seafood, tamarind, and vegetables.
-
-   - Patatim is a Filipino braised pork dish cooked in soy sauce, vinegar, and spices.
-
-   - Pancit Bihon is a Filipino stir-fried rice noodle dish with vegetables and meat or seafood.
-
-   - Sisig is a Filipino dish made with chopped meat, liver, and onions cooked on a hot griddle with vinegar and spices.
-
-   - Salmon is a pink-fleshed fish rich in omega-3 fatty acids, highly nutritious and versatile.
-
-   - Blueberries are small, round berries with a deep blue color and a sweet-tart flavor, packed with antioxidants.
-
-   - Spinach is a dark green leafy vegetable rich in iron, vitamins, and minerals, commonly used in salads and cooked dishes.
-
-   - Avocados are creamy fruits with a large pit, rich in healthy fats and often used in salads, guacamole, and toast.
-
-   - Mangoes are tropical stone fruits with sweet, juicy flesh, known as the king of fruits.
-
-   - Pasta Carbonara is an Italian main course made with pasta, guanciale, eggs, and Pecorino cheese.
-
-   - Sweet and Sour Pork is a Chinese stir-fry dish made with pork, bell peppers, and pineapple in a tangy sweet and sour sauce.
-
-   - Burritos are Mexican wraps made with a large flour tortilla filled with rice, beans, meat, and toppings.
-
-   - Tiramisu is an Italian dessert made with layers of sponge fingers dipped in coffee and mascarpone cream, dusted with cocoa.
-
-   - Green Curry is a Thai curry made with green chili peppers, coconut milk, bamboo shoots, and basil.
-
-- Personal Reflection
-   - In all honesty, this is all out of my comfort zone. Even as I am learning how the ropes are tied, I am still a bit unclear with how well I am doing. But things are working on my end - so that should count, right? I am learning new things every time, and it has been both an honor and a joy to see things work. RAG is something I never thought I'd touch, yet here I am, and I do have to say, I am seeing the appeal and efficiency of AI in the use of programming and coding for data. Having AI be used in the form of analyzing data and answering inquiries is very effective - and even more so when I am seeing it build something to life. Learning about AI really does change things and perspectives. Personally, as someone studying business management, these AI tools are so efficient and effective in the aspect of research and development, from data analysis to summarizing facts to make an inference. I want to learn more and see it come to fruition, so I will keep trying to succeed and will fail through the processes to get there.
+**Original RAG Demo**: Built with ChromaDB + Ollama local LLM
+**Web Application**: Next.js + Upstash Vector + Groq AI migration  
+**Food Knowledge Base**: 90+ global cuisines and recipes
+**Contributors**: Alaine Demate, Callum, and the RAG community
