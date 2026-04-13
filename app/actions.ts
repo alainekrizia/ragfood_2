@@ -44,7 +44,7 @@ try {
 
 // Simple embedding function using text hash for deterministic vectors
 function generateEmbedding(text: string): number[] {
-  const vector: number[] = new Array(1536).fill(0)
+  const vector: number[] = new Array(1024).fill(0)
   
   let hash = 0
   for (let i = 0; i < text.length; i++) {
